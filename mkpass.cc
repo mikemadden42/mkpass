@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cstdlib>
 #include <iostream>
 #include <random>
 #include <string>
@@ -18,4 +19,19 @@ std::string random_string(int size) {
     return str.substr(0, size);
 }
 
-int main() { std::cout << random_string(24) << std::endl; }
+int main(int argc, char *argv[]) {
+    size_t password_length;
+    if (argc != 2) {
+        std::cout << "Usage: " << argv[0] << " password length" << std::endl;
+        exit(1);
+    } else {
+        password_length = std::strtol(argv[1], nullptr, 10);
+        if (password_length == 0L) {
+            std::cout << "Cannot convert argument to number: " << argv[1]
+                      << std::endl;
+            exit(1);
+        }
+    }
+
+    std::cout << random_string(password_length) << std::endl;
+}
