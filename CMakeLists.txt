@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(namegen CXX)
+project(lsext CXX)
 
 set (CMAKE_CXX_STANDARD 17)
 if (NOT MSVC)
