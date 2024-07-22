@@ -5,7 +5,7 @@
 #include <string>
 
 // https://stackoverflow.com/questions/47977829/generate-a-random-string-in-c11
-// g++ -std=c++17 -Wall -Wextra -pedantic -o mkpass mkpass.cc
+// g++ -std=c++17 -Wall -Wextra -pedantic -o mkpass main.cc
 
 std::string random_string(size_t size) {
     std::string str(

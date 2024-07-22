@@ -68,7 +68,7 @@ else()
 endif()
 
 # Add the executable
-add_executable(mkpass mkpass.cc)
+add_executable(mkpass main.cc)
 
 # Apply custom flags based on build type
 function(add_custom_flags target)
