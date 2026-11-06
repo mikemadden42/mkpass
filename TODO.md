@@ -36,7 +36,7 @@ ones.
   - None of 2,000 sampled 16-character passwords had a repeated character. This
     costs about 3 bits at length 16 and grows with length.
   - Asking for `100` returns 62 characters with no error.
-- [ ] **High: bad input can silently produce a weak password (lines 28-29).**
+- [x] **High: bad input can silently produce a weak password (lines 28-29).**
       Also add a minimum length, and send errors and usage text to stderr
       instead of stdout.
 
@@ -75,10 +75,10 @@ that on each target platform; some old MinGW versions were deterministic.
 
 ### High
 
-- [ ] `Makefile:1`: `make` fails with "No rule to make target `mkpass`". Commit
+- [x] `Makefile:1`: `make` fails with "No rule to make target `mkpass`". Commit
       `24c4bd6` renamed the source to `main.cc` but didn't update the Makefile.
       (Tested)
-- [ ] `.github/workflows/cmake.yml:36`: `ctest` exits 1 locally with "No test
+- [x] `.github/workflows/cmake.yml:36`: `ctest` exits 1 locally with "No test
       configuration file found", because there's no `enable_testing()` or any
       tests. CI would likely fail at that step, though the runner's version may
       differ. (Tested locally with ctest 4.4.5; the Actions API returned no runs)
@@ -107,7 +107,7 @@ that on each target platform; some old MinGW versions were deterministic.
 - [ ] `CMakeLists.txt:54,107,115`: `/DEBUG /COVERAGE` is passed as one quoted
       argument, and `/COVERAGE` and `/fsanitize=undefined` don't look like valid
       `cl` flags. (By reading, not tested on Windows)
-- [ ] `Makefile:13`: `make clean` errors if nothing is built; use `rm -f`.
+- [x] `Makefile:13`: `make clean` errors if nothing is built; use `rm -f`.
       (Tested)
 - [ ] `.github/workflows/cmake.yml:18,21`: CI only runs on Ubuntu despite the
       cross-platform scripts, and `checkout@v3` is out of date. (By reading)

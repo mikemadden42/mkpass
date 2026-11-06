@@ -137,3 +137,10 @@ if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
         OSX_ARCHITECTURES "x86_64;arm64"
     )
 endif()
+
+# Tests
+enable_testing()
+add_test(NAME cli
+    COMMAND ${CMAKE_COMMAND} -DMKPASS=$<TARGET_FILE:mkpass>
+            -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/cli_test.cmake
+)
