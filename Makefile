@@ -6,8 +6,9 @@ LIBS=
 
 all: $(PROGRAMS)
 
-.cc: ; $(CC) $(CFLAGS) $@.cc $(LIBS) -o $@
+mkpass: main.cc
+	$(CC) $(CFLAGS) main.cc $(LIBS) -o $@
 	strip $@
 
 clean:
-	rm $(PROGRAMS)
+	rm -f $(PROGRAMS)
