@@ -1,22 +1,26 @@
-#include <algorithm>
 #include <cstdlib>
 #include <iostream>
 #include <random>
 #include <string>
+#include <string_view>
 
 // https://stackoverflow.com/questions/47977829/generate-a-random-string-in-c11
 // g++ -std=c++17 -Wall -Wextra -pedantic -o mkpass main.cc
 
 std::string random_string(size_t size) {
-    std::string str(
-        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+    static constexpr std::string_view alphabet =
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     std::random_device rd;
-    std::mt19937 generator(rd());
+    std::uniform_int_distribution<size_t> dist(0, alphabet.size() - 1);
 
-    std::shuffle(str.begin(), str.end(), generator);
+    std::string str;
+    str.reserve(size);
+    for (size_t i = 0; i < size; ++i) {
+        str += alphabet[dist(rd)];
+    }
 
-    return str.substr(0, size);
+    return str;
 }
 
 int main(int argc, char *argv[]) {
