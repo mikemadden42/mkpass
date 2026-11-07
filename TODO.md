@@ -80,17 +80,20 @@ that on each target platform; some old MinGW versions were deterministic.
       (Tested)
 - [x] `.github/workflows/cmake.yml:36`: `ctest` exits 1 locally with "No test
       configuration file found", because there's no `enable_testing()` or any
-      tests. CI would likely fail at that step, though the runner's version may
-      differ. (Tested locally with ctest 4.4.5; the Actions API returned no runs)
+      tests. CI itself passed without tests, so this step wasn't failing there
+      and likely tested nothing. (Tested locally with ctest 4.4.5; CI result
+      from the Actions API)
 
 ### Medium
 
-- [ ] `run-builds.bat:30`: builds `dirsize.sln`, apparently left over from
-      another project, so the MSBuild step can't work. (By reading)
-- [ ] `run-builds.bat:29,31`: `%errorlevel%` inside a parenthesized block expands
-      at parse time, so failures aren't detected. (By reading)
+- [x] `run-builds.bat:30`: builds `dirsize.sln`, apparently left over from
+      another project, so the MSBuild step can't work. (By reading; script deleted
+      in favor of `run-builds.ps1`)
+- [x] `run-builds.bat:29,31`: `%errorlevel%` inside a parenthesized block expands
+      at parse time, so failures aren't detected. (By reading; script deleted in
+      favor of `run-builds.ps1`)
 - [ ] `run-builds.bash:4`: always exits 1 on macOS, because Apple clang doesn't
-      support MSAN. The `.ps1` and `.bat` lists also include sanitizers MSVC
+      support MSAN. The `.ps1` list also includes sanitizers MSVC
       doesn't support. (Tested on macOS)
 - [ ] `CMakeLists.txt:12`: `set(CMAKE_CXX_FLAGS ...)` throws away the user's
       flags; `CXXFLAGS=-DFOO` never reached the compile line. Use
@@ -109,5 +112,5 @@ that on each target platform; some old MinGW versions were deterministic.
       `cl` flags. (By reading, not tested on Windows)
 - [x] `Makefile:13`: `make clean` errors if nothing is built; use `rm -f`.
       (Tested)
-- [ ] `.github/workflows/cmake.yml:18,21`: CI only runs on Ubuntu despite the
+- [x] `.github/workflows/cmake.yml:18,21`: CI only runs on Ubuntu despite the
       cross-platform scripts, and `checkout@v3` is out of date. (By reading)
