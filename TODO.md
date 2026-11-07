@@ -92,22 +92,22 @@ that on each target platform; some old MinGW versions were deterministic.
 - [x] `run-builds.bat:29,31`: `%errorlevel%` inside a parenthesized block expands
       at parse time, so failures aren't detected. (By reading; script deleted in
       favor of `run-builds.ps1`)
-- [ ] `run-builds.bash:4`: always exits 1 on macOS, because Apple clang doesn't
+- [x] `run-builds.bash:4`: always exits 1 on macOS, because Apple clang doesn't
       support MSAN. The `.ps1` list also includes sanitizers MSVC
       doesn't support. (Tested on macOS)
-- [ ] `CMakeLists.txt:12`: `set(CMAKE_CXX_FLAGS ...)` throws away the user's
+- [x] `CMakeLists.txt:12`: `set(CMAKE_CXX_FLAGS ...)` throws away the user's
       flags; `CXXFLAGS=-DFOO` never reached the compile line. Use
       `target_compile_options`. (Tested)
 
 ### Low
 
-- [ ] `CMakeLists.txt:74-129`: `add_custom_flags` duplicates the per-config flags
+- [x] `CMakeLists.txt:74-129`: `add_custom_flags` duplicates the per-config flags
       on lines 18-68. Deleting it should simplify the file a lot. (By reading)
-- [ ] `CMakeLists.txt:122`: the comment assumes `-O2`, but Release actually uses
+- [x] `CMakeLists.txt:122`: the comment assumes `-O2`, but Release actually uses
       `-O3 -DNDEBUG`. (Tested)
-- [ ] `CMakeLists.txt:38,46`: MSVC gets the TSan and MSan warnings on every
+- [x] `CMakeLists.txt:38,46`: MSVC gets the TSan and MSan warnings on every
       configure, even for Release. (By reading)
-- [ ] `CMakeLists.txt:54,107,115`: `/DEBUG /COVERAGE` is passed as one quoted
+- [x] `CMakeLists.txt:54,107,115`: `/DEBUG /COVERAGE` is passed as one quoted
       argument, and `/COVERAGE` and `/fsanitize=undefined` don't look like valid
       `cl` flags. (By reading, not tested on Windows)
 - [x] `Makefile:13`: `make clean` errors if nothing is built; use `rm -f`.
