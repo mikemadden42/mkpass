@@ -1,5 +1,5 @@
 # List of build types
-$buildTypes = @("Debug", "Release", "ASAN", "UBSAN", "TSAN", "MSAN", "COVERAGE", "RelWithDebInfo")
+$buildTypes = @("Debug", "Release", "ASAN", "RelWithDebInfo")
 
 # Directory for the build
 $buildDir = "build"

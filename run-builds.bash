@@ -1,7 +1,12 @@
 #!/bin/bash
 
 # List of build types
-BUILD_TYPES=("Debug" "Release" "ASAN" "UBSAN" "TSAN" "MSAN" "COVERAGE" "RelWithDebInfo")
+BUILD_TYPES=("Debug" "Release" "ASAN" "UBSAN" "TSAN" "COVERAGE" "RelWithDebInfo")
+
+# MemorySanitizer is not available on macOS
+if [ "$(uname)" != "Darwin" ]; then
+	BUILD_TYPES+=("MSAN")
+fi
 
 # Directory for the build
 BUILD_DIR="build"
@@ -24,11 +29,8 @@ for build_type in "${BUILD_TYPES[@]}"; do
 	mkdir -p $BUILD_DIR
 	cd $BUILD_DIR
 
-	# Run CMake with the current build type
-	cmake -DCMAKE_BUILD_TYPE=$build_type ..
-
-	# Build the project
-	if make; then
+	# Run CMake with the current build type and build the project
+	if cmake -DCMAKE_BUILD_TYPE=$build_type .. && cmake --build .; then
 		echo "$build_type build succeeded."
 		successful_builds+=($build_type) # Add the successful build type to the list
 		((success_count++))
