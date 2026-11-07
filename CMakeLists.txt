@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Set the project name
-project(mkpass VERSION 1.0)
+project(mkpass VERSION 1.1.0)
 
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
